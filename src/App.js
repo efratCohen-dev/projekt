@@ -8,7 +8,7 @@ import Toolbar from '@mui/material/Toolbar';
 import { cyan, teal,lime} from '@mui/material/colors';
 import Tab from '@mui/material/Tab';
 const LazyHome=React.lazy(()=>import('./component/Home/home'))
-const LazyToDo=React.lazy(()=>import('./component/ToDo/todo'))
+const LazyToDo=React.lazy(()=>import('./component/Tasks/Takses'))
 const LazyPost=React.lazy(()=>import('./component/Post/post'))
 const LazyPoto=React.lazy(()=>import('./component/Poto/poto'))
 function App() {
