@@ -1,7 +1,8 @@
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
-
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
 import useDelete from "../../Hooks/DeleteHook";
@@ -23,6 +24,8 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 const OnePost=(props)=>{
     const dispatch = useDispatch()
+    const [words, setWords] = useState((props.items.content).slice(0, 50))
+    const [readMore, setReadMore] = useState(false)
     const [edit, setEdit] = useState(false)
     const[like,setLike]=useState(false)
     const[cnt,setCnt]=useState(0)
@@ -48,14 +51,32 @@ const OnePost=(props)=>{
         <>
             {!edit ?
               <Card sx={{ width:'15%', margin: 'auto', marginTop: '10px', borderStyle: 'solid', borderColor: teal['500'] }}>
-                    <CardContent>
+                   {!readMore?
+                        <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
-                            {props.items.content}
+                            {words}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
                             {Date}
                         </Typography>
+                        
+                        <Button size="xxlarge" onClick={() => setReadMore(true)} >
+                            <ExpandMore size="xxlarge" sx={{ color: grey['800'] }} />
+                            </Button>
                     </CardContent>
+                   :
+                   <CardContent>
+                   <Typography gutterBottom variant="h5" component="div">
+                       {props.items.content}
+                   </Typography>
+                   <Typography variant="body2" color="text.secondary">
+                       {Date}
+                   </Typography>
+                   <Button size="xxlarge" onClick={() => setReadMore(false)} >
+                    <ExpandLess size="xxlarge" sx={{ color: grey['800'] }} />
+                    </Button>
+                   </CardContent>
+                   }
                     {/* <Checkbox {...label} defaultNotChecked disabled/> */}
                     <CardActions >
 
