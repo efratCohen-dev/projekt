@@ -4,7 +4,10 @@ const usePut=(props)=>{
 
     const axiosDataPut=async(updateData)=>{
     try{
-        const put=await axios.put(props.url,updateData)
+        let s=props.url;
+        s+='/';
+        s+=updateData.id;
+        const put=await axios.put(s,updateData)
     }catch{
         console.log("error put")
     }

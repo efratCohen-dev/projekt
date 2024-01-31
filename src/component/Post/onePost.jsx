@@ -32,8 +32,8 @@ const OnePost=(props)=>{
     // const [isComplete, setIsComplete] = useState(props.items.isComplete)
     // const [time, setTime] = useState(props.items.caeteDate)
     const [content, setContent] = useState(props.items.content)
-    const{axiosDataDelete}=useDelete({url:"api\delete\Post"})
-    const {axiosDataPut}=usePut({url:"api\put"})
+    const{axiosDataDelete}=useDelete({url:"https://localhost:7126/api/Post"})
+    const {axiosDataPut}=usePut({url:"https://localhost:7126/api/Post"})
     const moment= require('moment') 
     const d=props.items.caeteDate;
     const Date=moment(d).format("DD/MM/yyy kk:mm:ss");
