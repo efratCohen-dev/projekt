@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initValue={
-    postes:[{id:5,content:"fghj",caeteDate:Date.now(),like:false}]
+    postes:[]
 }
 
 const PostSlice=createSlice({

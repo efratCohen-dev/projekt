@@ -1,9 +1,12 @@
 import axios from "axios"
-import React, { useState } from "react"
+import React, {useEffect, useState } from "react"
 
 const useGet=(props)=>{
 
-    const [res,setRes]=useState([{id:5,content:"fghj",caeteDate:Date.now(),like:false}])
+    const [res,setRes]=useState([])
+    useEffect(()=>{
+        axiosData()
+    },[])
     const axiosData=async()=>{
     try{
         const get=await axios.get(props.url)

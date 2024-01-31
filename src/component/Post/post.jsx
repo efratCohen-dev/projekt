@@ -16,8 +16,8 @@ const Post=()=>{
     const [open, setOpen] = React.useState(false);
     const [content,setContent]=useState("");
     const [id,setId]=useState(0);
-    const {res,axiosData}=useGet({url:"api/get/post"});
-    const {axiosDataPost}=usePost({url:"api/post/post"});
+    const {res,axiosData}=useGet({url:"https://localhost:7126/api/Post"});
+    const {axiosDataPost}=usePost({url:"https://localhost:7126/api/Post"});
     const dispatch = useDispatch()
     const handleClickOpen = () => {
       setOpen(true);
@@ -34,14 +34,17 @@ const Post=()=>{
             caeteDate:Date.now(),
             like:false
         }
-        dispatch(addPost({post:post}))
         axiosDataPost(post)
+        dispatch(addPost({post:post}))
+        // axiosDataPost(post)
         handleClose()
     }
-    useEffect(()=>{
-      axiosData()
-      dispatch(getAll({res:res}))
-    },[])
+    axiosData()
+    dispatch(getAll({res:res}))
+    // useEffect(()=>{
+    //   axiosData()
+    //   dispatch(getAll({res:res}))
+    // },[])
     return(
         <>
          <React.Fragment>
