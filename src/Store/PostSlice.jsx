@@ -19,6 +19,7 @@ const PostSlice=createSlice({
         state.postes.map((p)=>{
             if(p.id==actions.payload.id){
                 p.content=actions.payload.content
+                p.like=actions.payload.like
             }
         })
      }

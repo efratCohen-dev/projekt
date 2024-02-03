@@ -13,13 +13,16 @@ import usePost from "../../Hooks/PostHook";
 
 const Todoes=()=>{
  
-  const myTasks = useSelector(x => x.TodoSlice.tasks)
     const [open, setOpen] = React.useState(false);
     const [nameTask,setNameTask]=useState("");
-    const [id,setId]=useState(0);
-    const {res,axiosData}=useGet({url:"api/get"});
-    const {axiosDataPost}=usePost({url:"api/post"});
+    const {res,axiosData}=useGet({url:'https://localhost:7126/api/Todo'});
+    const {axiosDataPost}=usePost({url:'https://localhost:7126/api/Todo'});
     const dispatch = useDispatch()
+    useEffect(()=>{
+      axiosData()
+      dispatch(getAll({res:res}))
+    })
+    const myTasks = useSelector(x => x.TodoSlice.tasks)
     const handleClickOpen = () => {
       setOpen(true);
     };
@@ -28,9 +31,7 @@ const Todoes=()=>{
       setOpen(false);
     };
     const saveTask=()=>{
-        setId(id+1);
         const task={
-            id:id,
             name:nameTask,
             caeteDate:Date.now(),
             isComplated:false
@@ -39,10 +40,6 @@ const Todoes=()=>{
         axiosDataPost(task)
         handleClose()
     }
-    useEffect(()=>{
-      axiosData()
-      dispatch(getAll({res:res}))
-    },[])
     return(
         <> 
         <React.Fragment>

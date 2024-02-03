@@ -4,11 +4,9 @@ import React, {useEffect, useState } from "react"
 const useGet=(props)=>{
 
     const [res,setRes]=useState([])
-    useEffect(()=>{
-        axiosData()
-    },[])
     const axiosData=async()=>{
     try{
+
         const get=await axios.get(props.url)
         setRes(get.data) 
     }catch{

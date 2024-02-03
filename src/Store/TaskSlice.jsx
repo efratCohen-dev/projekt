@@ -20,7 +20,7 @@ const TodoSlice=createSlice({
         state.tasks.map((t)=>{
             if(t.id==actions.payload.id){
                 t.name=actions.payload.name
-                t.isComplete=actions.payload.isComplete
+                t.Complated=actions.payload.Complated
             }
         })
      }
