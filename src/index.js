@@ -7,12 +7,14 @@ import { BrowserRouter } from 'react-router-dom'
 import { configureStore } from '@reduxjs/toolkit';
 import TodoSlice from './Store/TaskSlice'
 import PostSlice from './Store/PostSlice';
+import UserSlice from './Store/UserSlice';
 import { Provider } from 'react-redux';
 
 const myStore=configureStore({
   reducer:{
     TodoSlice,
-    PostSlice
+    PostSlice,
+    UserSlice
   }
 })
 const root = ReactDOM.createRoot(document.getElementById('root'));

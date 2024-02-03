@@ -29,16 +29,15 @@ const OnePost=(props)=>{
     const [edit, setEdit] = useState(false)
     const[like,setLike]=useState(false)
     const[cnt,setCnt]=useState(0)
-    // const [isComplete, setIsComplete] = useState(props.items.isComplete)
-    // const [time, setTime] = useState(props.items.caeteDate)
     const [content, setContent] = useState(props.items.content)
     const{axiosDataDelete}=useDelete({url:"https://localhost:7126/api/Post"})
     const {axiosDataPut}=usePut({url:"https://localhost:7126/api/Post"})
     const moment= require('moment') 
-    const d=props.items.caeteDate;
+    const d=props.items.ceateDate;
     const Date=moment(d).format("DD/MM/yyy kk:mm:ss");
 
     const toEdit = () => {
+        setWords(content.slice(0, 50))
         setEdit(false)
         dispatch(editPost({id:props.items.id,content:content,like:like}))
         axiosDataPut({id:props.items.id,content:content,like:like})
@@ -46,6 +45,12 @@ const OnePost=(props)=>{
     const toDelete=()=>{
         axiosDataDelete(props.items.id)
         dispatch(deletePost({id:props.items.id}))
+    }
+    const toLike=()=>{
+        setLike(true)
+        setCnt(1)
+        dispatch(editPost({id:props.items.id,content:content,like:like}))
+        axiosDataPut({id:props.items.id,content:content,like:like})
     }
     return (
         <>
@@ -77,13 +82,12 @@ const OnePost=(props)=>{
                     </Button>
                    </CardContent>
                    }
-                    {/* <Checkbox {...label} defaultNotChecked disabled/> */}
                     <CardActions >
 
                         <Button size="xxlarge" onClick={()=>toDelete()}><DeleteForeverIcon size="xxlarge" sx={{ color: teal['500'] }} /></Button>
                         <Button size="xxlarge" onClick={() => setEdit(true)}><Mode size="xxlarge" sx={{ color: teal['500'] }} /></Button>
                         {!like?
-                        <Button size="xxlarge" onClick={() => setLike(true)}><FavoriteBorderIcon  size="xxlarge" sx={{ color: grey['900'] }} /></Button>
+                        <Button size="xxlarge" onClick={() => toLike()}><FavoriteBorderIcon  size="xxlarge" sx={{ color: grey['900'] }} /></Button>
                         :<Button size="xxlarge" onClick={()=>setCnt(cnt+1)}><FavoriteIcon  size="xxlarge" sx={{ color: red['900'] }} /></Button>
                         }
                     </CardActions>
@@ -96,19 +100,6 @@ const OnePost=(props)=>{
                     <CardContent>
                         <TextField id="outlined-basic"  variant="outlined"  defaultValue={props.items.content} onChange={(e) => setContent(e.target.value)} />
                     </CardContent>
-                    {/* {
-                    props.items.isComplete ?
-                        <Checkbox
-                            {...label}
-                            defaultChecked
-                            onClick={() => setIsComplete(!isComplete)}
-                        />
-                        : <Checkbox
-                            {...label}
-                            defaultNotChecked
-                            onClick={() => setIsComplete(!isComplete)}
-                        />
-                    } */}
                     <CardActions >
                         <Button size="xxlarge" onClick={()=>toEdit()} ><Send size="xxlarge" sx={{ color: teal['500'] }} /></Button>
                     </CardActions>

@@ -11,6 +11,7 @@ const LazyHome=React.lazy(()=>import('./component/Home/home'))
 const LazyToDo=React.lazy(()=>import('./component/Tasks/Takses'))
 const LazyPost=React.lazy(()=>import('./component/Post/post'))
 const LazyPoto=React.lazy(()=>import('./component/Poto/poto'))
+const LazyUser=React.lazy(()=>import('./component/Users/Users'))
 function App() {
   return (
     <div>
@@ -29,7 +30,7 @@ function App() {
             <Link to="/photo" underline="none">
              <Tab label="תמונות" sx={{color:lime['50'],fontSize:'20px'}}  /> 
             </Link>
-            <Link to="/users" underline="hover">
+            <Link to="/user" underline="hover">
              <Tab label="משתמשים" sx={{color:lime['50'],fontSize:'20px'}}  /> 
             </Link>
           </Toolbar>
@@ -40,6 +41,7 @@ function App() {
         <Route path="/todo"  element={<Suspense fallback={<h1>loading..</h1>}><LazyToDo/></Suspense>} />
         <Route path="/post"  element={<Suspense fallback={<h1>loading..</h1>}><LazyPost/></Suspense>} />
         <Route path="/poto"  element={<Suspense fallback={<h1>loading..</h1>}><LazyPoto/></Suspense>} />
+        <Route path="/user"  element={<Suspense fallback={<h1>loading..</h1>}><LazyUser/></Suspense>} />
       </Routes> 
     </div>
   );

@@ -12,13 +12,19 @@ import useGet from "../../Hooks/GetHook";
 import usePost from "../../Hooks/PostHook";
 
 const Post=()=>{
+ 
+  const [open, setOpen] = React.useState(false);
+  const [content,setContent]=useState("");
+  const {res,axiosData}=useGet({url:"https://localhost:7126/api/Post"});
+  const {axiosDataPost}=usePost({url:"https://localhost:7126/api/Post"});
+  const dispatch = useDispatch()
+ 
+ 
+  useEffect(()=>{
+    axiosData()
+    dispatch(getAll({res:res}))
+  })
     const myPostes = useSelector(x => x.PostSlice.postes)
-    const [open, setOpen] = React.useState(false);
-    const [content,setContent]=useState("");
-    const [id,setId]=useState(0);
-    const {res,axiosData}=useGet({url:"https://localhost:7126/api/Post"});
-    const {axiosDataPost}=usePost({url:"https://localhost:7126/api/Post"});
-    const dispatch = useDispatch()
     const handleClickOpen = () => {
       setOpen(true);
     };
@@ -27,24 +33,18 @@ const Post=()=>{
       setOpen(false);
     };
     const savePost=()=>{
-        setId(id+1);
         const post={
-            id:id,
             content:content,
-            caeteDate:Date.now(),
+            ceateDate:Date.now(),
             like:false
         }
         axiosDataPost(post)
         dispatch(addPost({post:post}))
-        // axiosDataPost(post)
         handleClose()
     }
-    axiosData()
-    dispatch(getAll({res:res}))
-    // useEffect(()=>{
-    //   axiosData()
-    //   dispatch(getAll({res:res}))
-    // },[])
+    // axiosData()
+    // dispatch(getAll({res:res}))
+
     return(
         <>
          <React.Fragment>
